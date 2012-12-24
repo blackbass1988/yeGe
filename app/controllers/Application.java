@@ -14,17 +14,6 @@ import static utils.StringUtils.getRandomFromArray;
 
 public class Application extends Controller {
 
-
-    static String[] productName = {"EggPunch", "FunnyLandia", "Texas Poker"};
-    static String[] author = {"Артур", "Timur", "La ji zao", "Felix", "Oleg",  "Sergey", "Alex", "Sandr"};
-//    static String[] phrases = {"${positive}, ваша игра ${name} ${howIt}, даешь ${positive2}",
-//            "${name} - ${positive}",
-//            "нуежели ${name} раньше не могли выпустить? Даешь ${positive2}, ${positive2}, ${positive2}, ${positive2}"
-//    };
-
-    static String[] headers = {"Вау", "Заебись", "Никогда лучше не слыхал!"};
-
-
     public static void index() {
 
         Integer countOfReviews = params.get("count", Integer.class);
@@ -40,7 +29,6 @@ public class Application extends Controller {
     }
 
     static Review generateReview() {
-
         String header = getHeader();
         String author = getAuthor();
         Review review = new Review(getProductName(), author, header, getPhrase());
