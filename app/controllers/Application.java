@@ -27,7 +27,10 @@ public class Application extends Controller {
 
     public static void index() {
 
-        int countOfReviews = 10;
+        Integer countOfReviews = params.get("count", Integer.class);
+        if (countOfReviews == null) {
+            countOfReviews = 10;
+        }
         List<Review> reviews = new LinkedList<>();
         for (int i = 0; i<countOfReviews; i++){
             reviews.add(generateReview());
@@ -47,7 +50,11 @@ public class Application extends Controller {
     }
 
     private static String getProductName() {
-        return getRandomFromArray(getAllProductsInStringAr());
+        String productName = params.get("name");
+        if (productName == null) {
+            productName = getRandomFromArray(getAllProductsInStringAr());
+        }
+        return productName;
     }
 
     private static String getPhrase() {
