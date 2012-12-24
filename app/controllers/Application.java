@@ -28,6 +28,10 @@ public class Application extends Controller {
         render(reviews);
     }
 
+    public static void info() {
+        render();
+    }
+
     static Review generateReview() {
         String header = getHeader();
         String author = getAuthor();

@@ -42,7 +42,6 @@ public class Review {
     public void replaceAll() {
         List<PlaceHolder> placeHolders =  getAllPlaceHolders();
         Integer i = 0;
-        Logger.info(placeHolders.toString());
         for (PlaceHolder placeHolder: placeHolders) {
             String[] variandsForPlaceHolder =  getAllVariantsForPlaceHolder(placeHolder.name);
             comment = comment.replaceFirst(String.format("\\$\\{%s\\}", placeHolder.name), getRandomFromArray(variandsForPlaceHolder));
