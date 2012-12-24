@@ -18,4 +18,8 @@ public class Review {
         comment = comment.replaceAll(String.format("\\$\\{%s\\}", placeHolder), placeHolderValue);
     }
 
+    public void cleanPunctuation() {
+        comment =  comment.replaceAll("([^a-z0-9A-Zа-яА-Я ])([^a-z0-9A-Zа-яА-Я ])", "$1");
+
+    }
 }
