@@ -1,4 +1,5 @@
-#{extends 'main.html' /}
-#{set title:'Home' /}
-
-#{welcome /}
+<ol>
+#{list items:reviews, as:'review'}
+    <li>${review.name} - ${review.header} - ${review.comment}</li>
+#{/list}
+</ol>
