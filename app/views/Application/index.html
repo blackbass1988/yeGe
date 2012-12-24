@@ -1,5 +1,15 @@
-<ol>
+
+<table border="1" style="width: '100%'">
+    <thead style="font-weight: bold;">
+        <td>Вымя</td>
+        <td>Заголовок</td>
+        <td>Текстовичок</td>
+    </thead>
 #{list items:reviews, as:'review'}
-    <li>${review.name} - ${review.header} - ${review.comment}</li>
+    <tr>
+        <td>${review.name}</td>
+        <td>${review.header}</td>
+        <td>${review.comment}</td>
+    </tr>
 #{/list}
-</ol>
+</table>
