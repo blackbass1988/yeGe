@@ -8,17 +8,16 @@ import java.util.List;
 /**
  * @author blackbass <o.salionov@zmeke.com>
  */
-@Entity(name = "adv_product")
-public class AdvProduct extends Model {
+@Entity(name = "author")
+public class Author extends Model {
     public String name;
 
+    public static String[] getAllAuthorsInStringArray() {
 
-    public static String[] getAllProductsInStringAr() {
-
-        List<AdvProduct> products = AdvProduct.all().fetch();
-        String[] variants = new String[products.size()];
+        List<Author> list = Author.all().fetch();
+        String[] variants = new String[list.size()];
         int i = 0;
-        for (AdvProduct product : products) {
+        for (Author product : list) {
             variants[i] = product.name;
             i++;
         }
