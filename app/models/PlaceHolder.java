@@ -1,9 +1,9 @@
 package models;
 
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
-import java.util.Random;
 
 /**
  * @author blackbass <o.salionov@zmeke.com>
@@ -11,6 +11,7 @@ import java.util.Random;
 @Entity(name = "place_holder")
 public class PlaceHolder extends Model {
 
+    @Required
     String name;
 
     public PlaceHolder(String group) {

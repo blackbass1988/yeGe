@@ -1,8 +1,11 @@
 package models;
 
+import play.data.validation.MaxSize;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import java.util.List;
 
 /**
@@ -11,6 +14,9 @@ import java.util.List;
 @Entity(name = "review_template")
 public class ReviewTemplate extends Model {
 
+    @Required
+    @Lob
+    @MaxSize(199999999)
     public String template;
 
     public ReviewTemplate(String template) {

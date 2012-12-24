@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 @Entity(name = "adv_product")
 public class AdvProduct extends Model {
+    @Required
     public String name;
 
 
