@@ -15,7 +15,6 @@ import java.util.List;
 public class ReviewTemplate extends Model {
 
     @Required
-    @Lob
     @MaxSize(199999999)
     public String template;
 

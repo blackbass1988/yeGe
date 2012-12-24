@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ public class Phrase extends Model {
 
     @ManyToOne
     @JoinColumn(name = "place_holder_id")
+    @Required
     public PlaceHolder placeHolder;
 
+    @Required
     public String variant;
 
     public Phrase(String placeHolder, String variant) {
