@@ -1,7 +1,5 @@
 package models;
 
-import play.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -36,15 +34,18 @@ public class Review {
     }
 
     public void cleanPunctuation() {
-        comment =  comment.replaceAll("([^a-z0-9A-Zа-яА-Я${} ])([^a-z0-9A-Zа-яА-Я${} ])", "$1");
+        comment = comment.replaceAll("([^a-z0-9A-Zа-яА-Я${} ])([^a-z0-9A-Zа-яА-Я${} ])", "$1");
     }
 
     public void replaceAll() {
-        List<PlaceHolder> placeHolders =  getAllPlaceHolders();
+        List<PlaceHolder> placeHolders = getAllPlaceHolders();
         Integer i = 0;
-        for (PlaceHolder placeHolder: placeHolders) {
-            String[] variandsForPlaceHolder =  getAllVariantsForPlaceHolder(placeHolder.name);
-            comment = comment.replaceFirst(String.format("\\$\\{%s\\}", placeHolder.name), getRandomFromArray(variandsForPlaceHolder));
+        for (PlaceHolder placeHolder : placeHolders) {
+            String[] variandsForPlaceHolder = getAllVariantsForPlaceHolder(placeHolder.name);
+            String replaceByThis = getRandomFromArray(variandsForPlaceHolder);
+            if (!replaceByThis.isEmpty()) {
+                comment = comment.replaceFirst(String.format("\\$\\{%s\\}", placeHolder.name), getRandomFromArray(variandsForPlaceHolder));
+            }
         }
     }
 
