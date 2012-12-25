@@ -34,7 +34,7 @@ public class Review {
     }
 
     public void cleanPunctuation() {
-        comment = comment.replaceAll("([^a-z0-9A-Zа-яА-Я${} ])([^a-z0-9A-Zа-яА-Я${} ])", "$1");
+        comment = comment.replaceAll("([^a-z0-9A-Zа-яА-Я${} ])([^a-z0-9A-Zа-яА-Я${} ])+", "$1");
     }
 
     public void replaceAll() {
