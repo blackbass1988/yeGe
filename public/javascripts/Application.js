@@ -1,3 +1,11 @@
+function generateLi(data){
+    var newList = "";
+    for (var i=0; i< data.length; i++) {
+        newList += "<li>" + data[i].template + "</li>"
+    }
+    return newList;
+}
+
 function handleProjectName(el) {
     el.change(function() {
 
@@ -10,10 +18,7 @@ function handleProjectName(el) {
               console.info(data);
                 var prEnabledTemplatesList = $("ul#project_enabledTemplates");
                 prEnabledTemplatesList.html("");
-                var newList = "";
-                for (var i=0; i< data.length; i++) {
-                    newList += "<li>" + data[i].template + "</li>"
-                }
+                var newList = generateLi(data);
                 prEnabledTemplatesList.html(newList);
             }
         })

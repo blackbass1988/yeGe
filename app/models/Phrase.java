@@ -4,9 +4,7 @@ import play.cache.Cache;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -16,7 +14,7 @@ import java.util.List;
 @Entity(name = "phrase")
 public class Phrase extends Model {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "place_holder_id")
     @Required
     public PlaceHolder placeHolder;
@@ -28,6 +26,12 @@ public class Phrase extends Model {
         this.placeHolder = PlaceHolder.getPlaceHolder(placeHolder);
         this.variant = variant;
     }
+
+    public Phrase(PlaceHolder placeHolder, String variant) {
+        this.placeHolder = placeHolder;
+        this.variant = variant;
+    }
+
 
     public static String[] getAllVariantsForPlaceHolder(String placeHolder) {
         List<Phrase> phraseList = Cache.get(String.format("phrase_list_%s", placeHolder), List.class);
