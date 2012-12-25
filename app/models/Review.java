@@ -39,7 +39,6 @@ public class Review {
 
     public void replaceAll() {
         List<PlaceHolder> placeHolders = getAllPlaceHolders();
-        Integer i = 0;
         for (PlaceHolder placeHolder : placeHolders) {
             String[] variandsForPlaceHolder = getAllVariantsForPlaceHolder(placeHolder.name);
             String replaceByThis = getRandomFromArray(variandsForPlaceHolder);

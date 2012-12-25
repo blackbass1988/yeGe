@@ -1,5 +1,6 @@
 package models;
 
+import play.cache.Cache;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -16,7 +17,11 @@ public class Author extends Model {
 
     public static String[] getAllAuthorsInStringArray() {
 
-        List<Author> list = Author.all().fetch();
+        List<Author> list = Cache.get("authors_list", List.class);
+        if (list == null) {
+            list = Author.all().fetch();
+            Cache.set("authors_list", list, "10s");
+        }
         String[] variants = new String[list.size()];
         int i = 0;
         for (Author product : list) {

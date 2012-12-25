@@ -1,5 +1,6 @@
 package models;
 
+import play.cache.Cache;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -24,10 +25,14 @@ public class PlaceHolder extends Model {
     }
 
     public static PlaceHolder getPlaceHolder(String placeHolder) {
-        PlaceHolder pHolder = PlaceHolder.find("name = ?", placeHolder).first();
+        PlaceHolder pHolder = Cache.get(String.format("place_holder_%s", placeHolder), PlaceHolder.class);
         if (pHolder == null) {
-            pHolder = new PlaceHolder(placeHolder);
-            pHolder.save();
+            pHolder = PlaceHolder.find("name = ?", placeHolder).first();
+            if (pHolder == null) {
+                pHolder = new PlaceHolder(placeHolder);
+                pHolder.save();
+            }
+            Cache.set(String.format("place_holder_%s", placeHolder), pHolder, "10s");
         }
         return pHolder;
     }

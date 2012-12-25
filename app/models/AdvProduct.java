@@ -1,5 +1,6 @@
 package models;
 
+import play.cache.Cache;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
@@ -17,7 +18,11 @@ public class AdvProduct extends Model {
 
     public static String[] getAllProductsInStringAr() {
 
-        List<AdvProduct> products = AdvProduct.all().fetch();
+        List<AdvProduct> products = Cache.get("adv_product_list", List.class);
+        if (products == null) {
+            products = AdvProduct.all().fetch();
+            Cache.set("adv_product_list", products, "10s");
+        }
         String[] variants = new String[products.size()];
         int i = 0;
         for (AdvProduct product : products) {

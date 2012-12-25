@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Review;
+import play.cache.Cache;
 import play.mvc.Controller;
 
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ import static utils.StringUtils.getRandomFromArray;
 public class Application extends Controller {
 
     public static void index() {
-
+        Cache.clear();
         Integer countOfReviews = params.get("count", Integer.class);
         if (countOfReviews == null) {
             countOfReviews = 10;
