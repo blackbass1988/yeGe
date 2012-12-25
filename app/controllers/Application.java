@@ -70,6 +70,10 @@ public class Application extends Controller {
         } else {
             project = Project.all().first();
         }
+        if (project ==null) {
+            project = new Project("Wheeny Slots");
+            project.save();
+        }
         return project;
     }
 

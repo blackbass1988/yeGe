@@ -59,7 +59,7 @@
         <div class="span4">
             <p>Включенные шаблоны</p>
             <ul id="project_enabledTemplates">
-                #{list items:activeProject.templates, as: 'template'}
+                #{list items:activeProject?.templates, as: 'template'}
                     <li>${template.template}</li>
                 #{/list}
             </ul>
