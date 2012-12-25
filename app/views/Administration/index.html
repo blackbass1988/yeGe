@@ -1,0 +1,54 @@
+#{extends 'main.html'/}
+#{set title:'Настройка' /}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">Генератор отзывов</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Сущность</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Author</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("author")}>+</a></td>
+        </tr>
+
+        <tr>
+            <td>Header</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("header")}>+</a></td>
+        </tr>
+
+        <tr>
+            <td>Phrase</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("phrase")}>+</a></td>
+        </tr>
+
+        <tr>
+            <td>PlaceHolder</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("placeholder")}>+</a></td>
+        </tr>
+
+        <tr>
+            <td>Project</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("project")}>+</a></td>
+        </tr>
+
+        <tr>
+            <td>ReviewTemplate</td>
+            <td><a class="offset10 btn btn-success" href=@{Administration.newInstance("template")}>+</a></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>
