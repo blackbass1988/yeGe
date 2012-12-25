@@ -5,6 +5,9 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author blackbass <o.salionov@zmeke.com>
@@ -15,8 +18,13 @@ public class PlaceHolder extends Model {
     @Required
     public String name;
 
+    @OneToMany(mappedBy = "placeHolder")
+    public List<Phrase> phrases;
+
+
     public PlaceHolder(String group) {
         this.name = group;
+        this.phrases = new ArrayList<>();
     }
 
 
