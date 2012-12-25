@@ -49,7 +49,7 @@ public class Application extends Controller {
         if (proj != null) {
             renderJSON(proj.templates);
         } else {
-            renderJSON("{[]}");
+            renderJSON("{}");
         }
     }
 

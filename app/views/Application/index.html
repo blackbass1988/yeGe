@@ -28,15 +28,18 @@
             <select name="project" id="project_name">
                 #{list items:projects, as: 'project'}
                     #{if activeProject == project}
-                        <option value=${project.id} selected="selected">${project.name}</option>
+                        <option value=${project.id} selected=
+                        "selected">${project.name}</option>
                     #{/if}
                     #{else }
                         <option value=${project.id}>${project.name}</option>
                     #{/else}
                 #{/list}
             </select>
-        *{<input type="text" id="name" name="name">}*
+        *{<a class="btn btn-success" href="#">+</a>}*
+
         </div>
+
     </div>
     <div class="row">
         <div class="span3">
@@ -52,13 +55,18 @@
         <a class="btn btn-success" href="/info" target="_blank">Подсказка</a>
     </div>
 </div>
-    <div class="span4">
-        <p>Включенные шаблоны</p>
+    <div class="container">
+        <div class="span4">
+            <p>Включенные шаблоны</p>
             <ul id="project_enabledTemplates">
-        #{list items:activeProject.templates, as: 'template'}
-                <li>${template.template}</li>
-        #{/list}
+                #{list items:activeProject.templates, as: 'template'}
+                    <li>${template.template}</li>
+                #{/list}
             </ul>
+            <div class="span1 offset3">
+                <a class="btn btn-success" href="#">+</a>
+            </div>
+        </div>
     </div>
 </div>
 </div>
