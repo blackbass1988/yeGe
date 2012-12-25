@@ -5,27 +5,36 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author blackbass <o.salionov@zmeke.com>
  */
 @Entity(name = "adv_product")
-public class AdvProduct extends Model {
+public class Project extends Model {
     @Required
     public String name;
 
+    @ManyToMany
+    public List<ReviewTemplate> templates;
+
+    public Project(String name) {
+        this.name = name;
+        templates = new ArrayList<>();
+    }
 
     public static String[] getAllProductsInStringAr() {
 
-        List<AdvProduct> products = Cache.get("adv_product_list", List.class);
+        List<Project> products = Cache.get("adv_product_list", List.class);
         if (products == null) {
-            products = AdvProduct.all().fetch();
+            products = Project.all().fetch();
             Cache.set("adv_product_list", products, "10s");
         }
         String[] variants = new String[products.size()];
         int i = 0;
-        for (AdvProduct product : products) {
+        for (Project product : products) {
             variants[i] = product.name;
             i++;
         }
@@ -34,6 +43,6 @@ public class AdvProduct extends Model {
 
 
     public String toString(){
-        return name;
+        return String.format("%s:{%s}", name, templates);
     }
 }
