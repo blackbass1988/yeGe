@@ -1,0 +1,30 @@
+#{extends 'main.html' /}
+<h2>View Phrase</h2>
+<div class="entity">
+	<div class="row">
+		<span class="elem">
+			placeHolder:
+		</span>
+		<span class="value">
+      ${entity.placeHolder}
+		</span>
+	</div>
+	<div class="row">
+		<span class="elem">
+			variant:
+		</span>
+		<span class="value">
+      ${entity.variant}
+		</span>
+	</div>
+	<div class="row">
+		<span class="elem">
+			id:
+		</span>
+		<span class="value">
+      ${entity.id}
+		</span>
+	</div>
+</div>
+<a href="@{Phrases.index}">Back</a>
+

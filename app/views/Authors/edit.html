@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+<h2>Edit Author</h2>
+<div class="entity">
+#{form @Authors.update(), id:'createForm'}
+	#{include 'Authors/_form.html' /}
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+</div>
+<a href="@{Authors.index}">Cancel</a>
+

@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+<h2>Create PlaceHolder</h2>
+<div class="entity">
+#{form @PlaceHolders.save(), id:'createForm'}
+	#{include 'PlaceHolders/_form.html' /}
+	<input type="submit" name="submit" value="Save" />
+#{/form}
+</div>
+<a href="@{PlaceHolders.index}">Cancel</a>
+

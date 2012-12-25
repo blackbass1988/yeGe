@@ -1,0 +1,28 @@
+#{extends 'main.html' /}
+<h2>Phrases</h2>
+<table class="entity Phrase">
+	<thead>
+		<tr>
+			<th><!-- actions --></th>
+				<th>Place Holder</th>
+				<th>Variant</th>
+				<th>Id</th>
+		</tr>
+	</thead>
+	<tbody>
+	#{list items:entities, as:'entity'}
+		<tr>
+			<td>
+				<a href="@{Phrases.show(entity.id)}">Show</a>&nbsp;
+				<a href="@{Phrases.edit(entity.id)}">Edit</a>&nbsp;
+				<a href="@{Phrases.delete(entity.id)}" onclick="if (!confirm('Are you sure you want to delete this record?')) return false;">Delete</a>
+			</td>
+					<td>${entity.placeHolder}</td>
+					<td>${entity.variant}</td>
+					<td>${entity.id}</td>
+		</tr>
+	#{/list}
+	</tbody>
+</table>
+<a href="@{Phrases.create}">Create</a>
+
