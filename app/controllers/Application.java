@@ -43,7 +43,7 @@ public class Application extends Controller {
 
     private static String getProductName() {
         String productName = params.get("name");
-        if (productName == null) {
+        if (productName == null || productName.isEmpty()) {
             productName = getRandomFromArray(getAllProductsInStringAr());
         }
         return productName;

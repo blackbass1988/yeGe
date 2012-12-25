@@ -1,15 +1,66 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="#">Генератор отзывов</a>
+        </div>
+    </div>
+</div>
+<div class="offset1">
+<div class="row">
+<div class="span6 hero-unit">
+    <p class="lead">
+        Настройка:
+    </p>
+#{form @Application.index()}
+    <div class="push"></div>
+    <div class="row">
+        <div class="span3">
+            <label for="name" class="">Название приложения</label>
+        </div>
+        <div class="span2">
+            <input type="text" id="name" name="name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3">
+            <label for="count">Количество отзывов</label>
+        </div>
+        <div class="span2">
+            <input type="text" id="count" name="count">
+        </div>
+    </div>
+    <p>
+        <button class="btn btn-success">Сгенерировать отчет</button>
+    </p>
+    <p>
+        <a class="btn btn-success" href="/admin">Админка</a>
+    </p>
 
-<table border="1" style="width: '100%'">
-    <thead style="font-weight: bold;">
-        <td>Вымя</td>
-        <td>Заголовок</td>
-        <td>Текстовичок</td>
-    </thead>
-#{list items:reviews, as:'review'}
-    <tr>
-        <td>${review.name}</td>
-        <td>${review.header}</td>
-        <td>${review.comment}</td>
-    </tr>
-#{/list}
-</table>
+</div>
+</div>
+#{/form}
+    <p class="lead">
+        Отчет:
+    </p>
+
+    <div class="row">
+        <div class="span8">
+            <table border="1">
+                <thead style="font-weight: bold;">
+                <td>Автор</td>
+                <td>Заголовок</td>
+                <td>Текст</td>
+                </thead>
+            #{list items:reviews, as:'review'}
+                <tr>
+                    <td>${review.name}</td>
+                    <td>${review.header}</td>
+                    <td>${review.comment}</td>
+                </tr>
+            #{/list}
+            </table>
+        </div>
+    </div>
+</div>
