@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 public class PlaceHolder extends Model {
 
     @Required
-    String name;
+    public String name;
 
     public PlaceHolder(String group) {
         this.name = group;
