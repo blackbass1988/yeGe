@@ -15,9 +15,9 @@ import java.util.List;
 public class Phrase extends Model {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "place_holder_id")
+    @JoinColumn(name = "place_holder_id", insertable=false, updatable=false)
     @Required
-    public PlaceHolder placeHolder;
+    PlaceHolder placeHolder;
 
     @Required
     public String variant;

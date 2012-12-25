@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Dictionary;
 import models.Project;
 import models.Review;
 import play.cache.Cache;
@@ -47,7 +48,8 @@ public class Application extends Controller {
     public static void getTempatesForProject(Long project){
         Project proj = Project.findById(project);
         if (proj != null) {
-            renderJSON(proj.templates);
+            List<Dictionary> dict = Dictionary.getFromReviewTemplates(proj.templates);
+            renderJSON(dict);
         } else {
             renderJSON("{}");
         }

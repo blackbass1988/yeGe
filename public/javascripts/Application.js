@@ -1,7 +1,7 @@
 function generateLi(data){
     var newList = "";
     for (var i=0; i< data.length; i++) {
-        newList += "<li>" + data[i].template + "</li>"
+        newList += "<li>" + data[i].value + "</li>"
     }
     return newList;
 }

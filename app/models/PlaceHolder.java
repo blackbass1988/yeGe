@@ -4,7 +4,9 @@ import play.cache.Cache;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,8 @@ public class PlaceHolder extends Model {
     @Required
     public String name;
 
-    @OneToMany(mappedBy = "placeHolder")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "place_holder_id")
     public List<Phrase> phrases;
 
 
