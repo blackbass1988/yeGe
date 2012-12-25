@@ -1,5 +1,9 @@
 #{extends 'main.html' /}
 #{set title:'Генератор отзывов' /}
+
+<script src="@{'/public/javascripts/Application.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -9,17 +13,24 @@
 </div>
 <div class="offset1">
 <div class="row">
-<div class="span6 hero-unit">
+<div class="span10 hero-unit">
+<div class="row">
+<div class="span6">
     <p class="lead">
         Настройка:
     </p>
 #{form @Application.index()}
     <div class="row">
         <div class="span3">
-            <label for="name" class="">Название приложения</label>
+            <label for="project_name" class="">Название проекта</label>
         </div>
         <div class="span2">
-            <input type="text" id="name" name="name">
+            <select name="project" id="project_name">
+                #{list items:projects, as: 'project'}
+                    <option value=${project.id}>${project.name}</option>
+                #{/list}
+            </select>
+        *{<input type="text" id="name" name="name">}*
         </div>
     </div>
     <div class="row">
@@ -35,14 +46,24 @@
         <a class="btn btn-success" href="/admin" target="_blank">Админка</a>
         <a class="btn btn-success" href="/info" target="_blank">Подсказка</a>
     </div>
-
 </div>
+    <div class="span4">
+        <p>Включенные шаблоны</p>
+            <ul id="project_enabledTemplates">
+        #{list items:activeProject.templates, as: 'template'}
+                <li>${template.template}</li>
+        #{/list}
+            </ul>
+    </div>
+</div>
+</div>
+
 </div>
 #{/form}
     <p class="lead">
         Отчет:
     </p>
-
+#{if !reviews.isEmpty()}
     <div class="row">
         <div class="span8">
             <table border="1">
@@ -51,14 +72,15 @@
                 <td>Заголовок</td>
                 <td>Текст</td>
                 </thead>
-            #{list items:reviews, as:'review'}
-                <tr>
-                    <td>${review.name}</td>
-                    <td>${review.header}</td>
-                    <td>${review.comment}</td>
-                </tr>
-            #{/list}
+                #{list items:reviews, as:'review'}
+                    <tr>
+                        <td>${review.name}</td>
+                        <td>${review.header}</td>
+                        <td>${review.comment}</td>
+                    </tr>
+                #{/list}
             </table>
         </div>
     </div>
+#{/if}
 </div>
