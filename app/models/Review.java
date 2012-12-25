@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static models.Phrase.getAllVariantsForPlaceHolder;
+import static models.ReviewTemplate.getReviewTemplatesInArray;
 import static utils.StringUtils.getRandomFromArray;
 
 /**
@@ -15,18 +16,17 @@ public class Review {
     String name;
     String header;
     String comment;
+    Project project;
 
-    public Review(String name, String header, String comment) {
-        this.name = name;
-        this.header = header;
-        this.comment = comment;
-    }
-
-    public Review(String productName, String author, String header, String comment) {
+    public Review(Project project, String author, String header) {
         this.name = author;
         this.header = header;
-        this.comment = comment;
-        replaceAll("name", productName);
+        this.comment = getPhrase();
+        replaceAll("name", project.name);
+    }
+
+    private static String getPhrase() {
+        return getRandomFromArray(getReviewTemplatesInArray());
     }
 
     public void replaceAll(String placeHolder, String placeHolderValue) {
@@ -58,5 +58,9 @@ public class Review {
             }
         }
         return placeHolders;
+    }
+
+    public String getComment() {
+        return comment;
     }
 }

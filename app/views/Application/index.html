@@ -27,7 +27,12 @@
         <div class="span2">
             <select name="project" id="project_name">
                 #{list items:projects, as: 'project'}
-                    <option value=${project.id}>${project.name}</option>
+                    #{if activeProject == project}
+                        <option value=${project.id} selected="selected">${project.name}</option>
+                    #{/if}
+                    #{else }
+                        <option value=${project.id}>${project.name}</option>
+                    #{/else}
                 #{/list}
             </select>
         *{<input type="text" id="name" name="name">}*

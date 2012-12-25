@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Project;
 import models.Review;
 import play.cache.Cache;
 import play.mvc.Controller;
@@ -7,10 +8,8 @@ import play.mvc.Controller;
 import java.util.LinkedList;
 import java.util.List;
 
-import static models.AdvProduct.getAllProductsInStringAr;
 import static models.Author.getAllAuthorsInStringArray;
 import static models.Header.getAllHeadersInStringArray;
-import static models.ReviewTemplate.getReviewTemplatesInArray;
 import static utils.StringUtils.getRandomFromArray;
 
 public class Application extends Controller {
@@ -23,37 +22,56 @@ public class Application extends Controller {
         }
         List<Review> reviews = new LinkedList<>();
         for (int i = 0; i<countOfReviews; i++){
-            reviews.add(generateReview());
+            Review review = generateReview();
+            if (!review.getComment().isEmpty()) {
+                reviews.add(review);
+            }
         }
 
-        render(reviews);
+        Project activeProject = null;
+        Long projectId = params.get("project", Long.class);
+        if (projectId != null) {
+            activeProject = Project.find("id=?", projectId).first();
+        }
+        List<Project> projects = Project.all().fetch();
+        if (activeProject == null) {
+            activeProject = Project.all().first();
+        }
+        render(reviews, projects, activeProject);
     }
 
     public static void info() {
         render();
     }
 
+    public static void getTempatesForProject(Long project){
+        Project proj = Project.findById(project);
+        if (proj != null) {
+            renderJSON(proj.templates);
+        } else {
+            renderJSON("{[]}");
+        }
+    }
+
     static Review generateReview() {
         String header = getHeader();
         String author = getAuthor();
-        Review review = new Review(getProductName(), author, header, getPhrase());
+        Review review = new Review(getProject(), author, header);
         review.replaceAll();
         review.cleanPunctuation();
         return review;
     }
 
-    private static String getProductName() {
-        String productName = params.get("name");
-        if (productName == null || productName.isEmpty()) {
-            productName = getRandomFromArray(getAllProductsInStringAr());
+    private static Project getProject() {
+        Long projectId = params.get("project", Long.class);
+        Project project;
+        if (projectId != null) {
+            project = Project.findById(projectId);
+        } else {
+            project = Project.all().first();
         }
-        return productName;
+        return project;
     }
-
-    private static String getPhrase() {
-        return getRandomFromArray(getReviewTemplatesInArray());
-    }
-
 
     private static String getAuthor() {
         return getRandomFromArray(getAllAuthorsInStringArray());
