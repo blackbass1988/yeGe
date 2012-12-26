@@ -41,8 +41,8 @@
     </div>
     <div class="row">
         <button class="btn btn-success">Сгенерировать отчет</button>
-        <a class="btn btn-success" href="/admin" target="_blank">Админка</a>
-        <a class="btn btn-success" href="/info" target="_blank">Подсказка</a>
+        <a class="btn" href="/admin" target="_blank">Админка</a>
+        <a class="btn" href="/info" target="_blank">Подсказка</a>
     </div>
 </div>
     <div class="container">
@@ -53,8 +53,13 @@
                     <li>${template.template}</li>
                 #{/list}
             </ul>
-            <div class="span1 offset3">
-                <a href="#myModal" role="button" data-toggle="modal" class="btn btn-success">+</a>
+            <div class="span3 offset1">
+                <div class="row">
+                    <a id="projects_edit_btn" class="btn" href="@{Projects.edit(activeProject.id)}"
+                       title="Редактировать включенные шаблоны">Настроить проект</a>
+                    <a href="#myModal" title="Добавить новый к проекту" role="button" data-toggle="modal"
+                       class="btn">Новый шаблон</a>
+                </div>
             </div>
         </div>
     </div>

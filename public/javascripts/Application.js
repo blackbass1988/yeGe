@@ -20,6 +20,7 @@ function handleProjectName(el) {
                 prEnabledTemplatesList.html("");
                 var newList = generateLi(data);
                 prEnabledTemplatesList.html(newList);
+                $("#projects_edit_btn").attr("href", "/projects/edit?id=" + selectedId)
             }
         })
     })
