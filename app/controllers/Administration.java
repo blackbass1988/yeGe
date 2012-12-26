@@ -1,11 +1,10 @@
 package controllers;
 
-import models.Dictionary;
-import models.Phrase;
-import models.PlaceHolder;
+import models.*;
 import play.Logger;
 import play.mvc.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class Administration extends Controller {
     }
 
     public static void newValue(String value, String type, String parent, Long parentId) {
-        Logger.info("hello");
+        List<Dictionary> dict = new ArrayList<>();
         switch (parent) {
             case "placeholder":
                 PlaceHolder placeHolder = PlaceHolder.findById(parentId);
@@ -25,11 +24,19 @@ public class Administration extends Controller {
                 placeHolder.save();
                 Logger.info(placeHolder.phrases.toString());
                 List<Phrase> phraseList = placeHolder.phrases;
-                List<Dictionary> dict = Dictionary.getFromPhraseList(phraseList);
+                dict = Dictionary.getFromPhraseList(phraseList);
+                renderJSON(dict);
+                break;
+            case "project":
+                Project project = Project.findById(parentId);
+                project.templates.add(new ReviewTemplate(value));
+                project.save();
+                List<ReviewTemplate> reviewTemplates = project.templates;
+                dict = Dictionary.getFromReviewTemplates(reviewTemplates);
                 renderJSON(dict);
                 break;
             default:
-                renderJSON("{}");
+                renderJSON(dict);
         }
     }
 }

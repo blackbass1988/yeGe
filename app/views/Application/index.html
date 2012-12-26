@@ -1,9 +1,6 @@
 #{extends 'main.html' /}
 #{set title:'Генератор отзывов' /}
 
-<script src="@{'/public/javascripts/Application.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-
-
 <div class="offset1">
 <div class="row">
 <div class="span10 hero-unit">
@@ -51,13 +48,13 @@
     <div class="container">
         <div class="span4">
             <p>Включенные шаблоны</p>
-            <ul id="project_enabledTemplates">
+            <ul id="scaffold_sublist">
                 #{list items:activeProject?.templates, as: 'template'}
                     <li>${template.template}</li>
                 #{/list}
             </ul>
             <div class="span1 offset3">
-                <a class="btn btn-success" href="#">+</a>
+                <a href="#myModal" role="button" data-toggle="modal" class="btn btn-success">+</a>
             </div>
         </div>
     </div>
@@ -89,4 +86,26 @@
         </div>
     </div>
 #{/if}
+</div>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Новый шаблон</h3>
+    </div>
+    <div class="modal-body">
+        <div class="label">Значение:</div>
+        <div class="field">
+            <input id="scaffold_value_input" class="input" name="value">
+        </div>
+        <input id="scaffold_type" name="type" type="hidden" value="template">
+        <input id="scaffold_parent" name="parent" type="hidden" value="project">
+        <input id="scaffold_parent_id" name="parent_id" type="hidden" value="${activeProject.id}">
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button id="scaffold_new_save" class="btn btn-primary">Save changes</button>
+    </div>
 </div>

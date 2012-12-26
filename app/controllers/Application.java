@@ -37,9 +37,9 @@ public class Application extends Controller {
         for (int i = 0; i<countOfReviews; i++){
             Logger.info("active project %s", activeProject);
             Review review = generateReview(activeProject);
-//            if (!review.getComment().isEmpty()) {
+            if (!review.getComment().isEmpty()) {
                 reviews.add(review);
-//            }
+            }
         }
         Logger.info("reviews : %s", reviews);
         render(reviews, projects, activeProject);
