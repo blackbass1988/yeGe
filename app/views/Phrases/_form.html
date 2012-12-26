@@ -1,8 +1,8 @@
  <div class="row">
   <div class="label">Place Holder</div>
   <div class="field">
-        <select name="entity.placeHolder.id">
-                      <option value="">(None)</option>              
+        <select name="entity.placeHolder.id" required>
+                      <option value="">(None)</option>
         %{ models.PlaceHolder.all().fetch().sort{ it.toString() }.each() { }%
           %{
             selected = false;
@@ -19,7 +19,7 @@
  <div class="row">
   <div class="label">Variant</div>
   <div class="field">
-      <input type="text" name="entity.variant" value="${entity?.variant}"/>
+      <input type="text" name="entity.variant" value="${entity?.variant}" required/>
   </div>
   <span class="error">${errors.forKey('entity.variant')}</span>
 </div>
