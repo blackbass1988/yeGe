@@ -16,7 +16,6 @@ function handleProjectName(el) {
                 project : selectedId
             },
             success: function(data) {
-              console.info(data);
                 var prEnabledTemplatesList = $("ul#scaffold_sublist");
                 prEnabledTemplatesList.html("");
                 var newList = generateLi(data);
