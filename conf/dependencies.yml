@@ -2,6 +2,4 @@
 
 require:
     - play
-    - play -> crud
     - log4j -> apache-log4j-extras 1.1
-#    - play -> scaffold 0.1
