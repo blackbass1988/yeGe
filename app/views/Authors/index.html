@@ -11,7 +11,6 @@
 	#{list items:entities, as:'entity'}
 		<tr>
 			<td>
-				<a href="@{Authors.show(entity.id)}">Show</a>&nbsp;
 				<a href="@{Authors.edit(entity.id)}">Edit</a>&nbsp;
 				<a href="@{Authors.delete(entity.id)}" onclick="if (!confirm('Are you sure you want to delete this record?')) return false;">Delete</a>
 			</td>
