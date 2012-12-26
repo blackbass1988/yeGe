@@ -19,14 +19,15 @@ public class Review {
     Project project;
 
     public Review(Project project, String author, String header) {
+        this.project = project;
         this.name = author;
         this.header = header;
         this.comment = getPhrase();
         replaceAll("name", project.name);
     }
 
-    private static String getPhrase() {
-        return getRandomFromArray(getReviewTemplatesInArray());
+    private String getPhrase() {
+        return getRandomFromArray(getReviewTemplatesInArray(project));
     }
 
     public void replaceAll(String placeHolder, String placeHolderValue) {

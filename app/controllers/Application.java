@@ -3,6 +3,7 @@ package controllers;
 import models.Dictionary;
 import models.Project;
 import models.Review;
+import play.Logger;
 import play.cache.Cache;
 import play.mvc.Controller;
 
@@ -17,18 +18,6 @@ public class Application extends Controller {
 
     public static void index() {
         Cache.clear();
-        Integer countOfReviews = params.get("count", Integer.class);
-        if (countOfReviews == null) {
-            countOfReviews = 10;
-        }
-        List<Review> reviews = new LinkedList<>();
-        for (int i = 0; i<countOfReviews; i++){
-            Review review = generateReview();
-            if (!review.getComment().isEmpty()) {
-                reviews.add(review);
-            }
-        }
-
         Project activeProject = null;
         Long projectId = params.get("project", Long.class);
         if (projectId != null) {
@@ -38,6 +27,21 @@ public class Application extends Controller {
         if (activeProject == null) {
             activeProject = Project.all().first();
         }
+
+        Integer countOfReviews = params.get("count", Integer.class);
+        if (countOfReviews == null) {
+            countOfReviews = 10;
+        }
+        List<Review> reviews = new LinkedList<>();
+        Logger.info("acount of res %s", countOfReviews);
+        for (int i = 0; i<countOfReviews; i++){
+            Logger.info("active project %s", activeProject);
+            Review review = generateReview(activeProject);
+//            if (!review.getComment().isEmpty()) {
+                reviews.add(review);
+//            }
+        }
+        Logger.info("reviews : %s", reviews);
         render(reviews, projects, activeProject);
     }
 
@@ -55,28 +59,13 @@ public class Application extends Controller {
         }
     }
 
-    static Review generateReview() {
+    static Review generateReview(Project activeProject) {
         String header = getHeader();
         String author = getAuthor();
-        Review review = new Review(getProject(), author, header);
+        Review review = new Review(activeProject, author, header);
         review.replaceAll();
         review.cleanPunctuation();
         return review;
-    }
-
-    private static Project getProject() {
-        Long projectId = params.get("project", Long.class);
-        Project project;
-        if (projectId != null) {
-            project = Project.findById(projectId);
-        } else {
-            project = Project.all().first();
-        }
-        if (project ==null) {
-            project = new Project("Wheeny Slots");
-            project.save();
-        }
-        return project;
     }
 
     private static String getAuthor() {
