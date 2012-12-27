@@ -33,15 +33,12 @@ public class Application extends Controller {
             countOfReviews = 10;
         }
         List<Review> reviews = new LinkedList<>();
-        Logger.info("acount of res %s", countOfReviews);
         for (int i = 0; i<countOfReviews; i++){
-            Logger.info("active project %s", activeProject);
             Review review = generateReview(activeProject);
             if (!review.getComment().isEmpty()) {
                 reviews.add(review);
             }
         }
-        Logger.info("reviews : %s", reviews);
         render(reviews, projects, activeProject);
     }
 

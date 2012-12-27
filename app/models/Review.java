@@ -36,6 +36,21 @@ public class Review {
 
     public void cleanPunctuation() {
         comment = comment.replaceAll("([^a-z0-9A-Zа-яА-Я${} ])([^a-z0-9A-Zа-яА-Я${} ])+", "$1");
+        Pattern pattern = Pattern.compile("([!\\?\\.])(\\ *)([a-zа-я])");
+        Matcher matcher = pattern.matcher(comment);
+        while (matcher.find()) {
+            comment = comment.replace(matcher.group(), String.format("%s %s", matcher.group(1),
+                    matcher.group(3)).toUpperCase());
+        }
+        pattern = Pattern.compile("([,;:-])(\\ *)([A-ZА-Я])");
+        matcher = pattern.matcher(comment);
+        while (matcher.find()) {
+            comment = comment.replace(matcher.group(), String.format("%s %s", matcher.group(1),
+                    matcher.group(3)).toLowerCase());
+        }
+
+
+//        comment =  comment.replaceAll("(?s)(?<=[!\\?\\.])\\ *([a-zа-я])", " $1".toUpperCase());
     }
 
     public void replaceAll() {
